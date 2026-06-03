@@ -30,8 +30,11 @@ established (Option A — review-first).
    receipt number, billing period, payment method.
 4. **Classify** — suggest a Xero account by vendor (see mapping below).
 5. **Tax** — note whether US sales tax / GST may apply; confirm on the invoice.
-6. **Flag gaps** — if the amount lives only in a PDF attachment or vendor portal,
-   mark it `TBD — check portal/attachment`. (See limitation below.)
+6. **Attachments** — for items whose amount lives only in a PDF, look in the
+   Google Drive folder **`Accounting Stuff`** (attachments are auto-saved there by
+   the Gmail→Drive Apps Script). Find the PDF with the Drive `search_files` tool
+   (match by invoice number or vendor + date) and read it via `read_file_content`.
+   If the PDF isn't found, mark the amount `TBD — check portal/attachment`.
 7. **Output** the report using `reports/REPORT_TEMPLATE.md`. Save a dated copy to
    `accounting/reports/YYYY-MM-DD-sweep.md`.
 8. **Mark processed** — remove the `UNREAD` label from each processed message via
@@ -49,15 +52,48 @@ established (Option A — review-first).
 > These are defaults against Xero's standard chart of accounts. Darrell reclassifies
 > in Xero as needed. Update this table as new recurring vendors appear.
 
-## Known limitation — attachments
-The Gmail MCP integration exposes **no tool to download attachment bytes**. Emails
-where the dollar amount lives only in a PDF (e.g., Google Workspace, some Xero
-invoices) cannot be fully parsed from the email alone. Workarounds:
-- User supplies the amount, OR
-- A Gmail filter / Apps Script saves attachments to a Google Drive folder, which
-  *can* be read via the Drive `read_file_content` tool.
+## Attachments — Gmail→Drive bridge
+The Gmail MCP exposes **no tool to download attachment bytes**, so amounts that
+live only in a PDF can't be read from the email. **Solution in use:** a Google
+Apps Script auto-saves attachments from the `Accounting stuff` label into a Drive
+folder named **`Accounting Stuff`**, which the sweep reads via the Drive tools.
 
-Until then, attachment-only amounts are reported as `TBD`.
+### One-time setup (Apps Script)
+1. Go to https://script.google.com → **New project**.
+2. Paste the script below, save.
+3. Run `saveAccountingAttachments` once and grant permissions when prompted.
+4. **Triggers** (clock icon) → add a time-driven trigger, e.g. every 1 hour,
+   so new attachments land in Drive before the evening sweep.
+
+```javascript
+function saveAccountingAttachments() {
+  var labelName = 'Accounting stuff';
+  var folderName = 'Accounting Stuff';
+  var label = GmailApp.getUserLabelByName(labelName);
+  if (!label) return;
+
+  // Find/create the Drive folder.
+  var folders = DriveApp.getFoldersByName(folderName);
+  var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
+
+  // Only process threads that still have an attachment we haven't saved.
+  var threads = label.getThreads(0, 100);
+  threads.forEach(function (thread) {
+    thread.getMessages().forEach(function (msg) {
+      msg.getAttachments().forEach(function (att) {
+        if (att.getContentType() !== 'application/pdf') return;
+        // De-dupe by filename so re-runs don't pile up copies.
+        var existing = folder.getFilesByName(att.getName());
+        if (!existing.hasNext()) folder.createFile(att);
+      });
+    });
+  });
+}
+```
+
+> The sweep no longer marks Google/Xero amounts as `TBD` once their PDFs are in
+> the `Accounting Stuff` Drive folder. Only flag `TBD` if the PDF is genuinely
+> missing from Drive at sweep time.
 
 ## Schedule
 Target cadence: each weekday, off-peak (≈ 8:00 PM Pacific). Configured via the
