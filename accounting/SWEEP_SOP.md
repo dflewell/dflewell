@@ -47,6 +47,7 @@ established (Option A — review-first).
 | Xero | Software & Subscriptions |
 | Google Workspace / Google LLC | Software & Subscriptions (or Computer & Internet Expenses) |
 | AWS / Amazon Web Services | Computer & Internet Expenses |
+| Zoom / Zoom Communications, Inc. | Software & Subscriptions |
 | _Unknown vendor_ | Leave generic; flag for user to classify |
 
 > These are defaults against Xero's standard chart of accounts. Darrell reclassifies
