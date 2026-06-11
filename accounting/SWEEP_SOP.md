@@ -41,14 +41,14 @@ established (Option A — review-first).
    `unlabel_message` with `labelIds: ["UNREAD"]`. The next sweep then ignores them.
 
 ## Vendor → Xero account mapping (suggestions)
-| Vendor | Suggested Xero account |
-|---|---|
-| Anthropic (Claude) | Software & Subscriptions |
-| Xero | Software & Subscriptions |
-| Google Workspace / Google LLC | Software & Subscriptions (or Computer & Internet Expenses) |
-| AWS / Amazon Web Services | Computer & Internet Expenses |
-| Zoom / Zoom Communications, Inc. | Software & Subscriptions |
-| _Unknown vendor_ | Leave generic; flag for user to classify |
+| Vendor | Suggested Xero account | Notes |
+|---|---|---|
+| Anthropic (Claude) | Software & Subscriptions | |
+| Xero | Software & Subscriptions | ~$5.00/month (confirmed Jun 2026) |
+| Google Workspace / Google LLC | Software & Subscriptions (or Computer & Internet Expenses) | |
+| AWS / Amazon Web Services | Computer & Internet Expenses | |
+| Zoom / Zoom Communications, Inc. | Software & Subscriptions | $169.90/yr (confirmed Jun 2026) |
+| _Unknown vendor_ | Leave generic; flag for user to classify | |
 
 > These are defaults against Xero's standard chart of accounts. Darrell reclassifies
 > in Xero as needed. Update this table as new recurring vendors appear.
