@@ -1,0 +1,8 @@
+# Secrets and per-exec data — never commit these.
+.env
+client_secret.json
+token_*.json
+data/
+.venv/
+__pycache__/
+*.pyc

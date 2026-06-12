@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email Triage</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; background: #f4f1ea;
+           color: #2b2b2b; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+    .card { background: #fff; padding: 3rem; border-radius: 16px; text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,.08); max-width: 420px; }
+    h1 { font-size: 1.4rem; margin: 0 0 .5rem; }
+    p.sub { color: #6b6b6b; margin: 0 0 2rem; }
+    .btn { display: inline-block; background: #b5651d; color: #fff; text-decoration: none;
+           font-size: 1.1rem; padding: 1rem 2.5rem; border-radius: 999px; border: none; cursor: pointer; }
+    .btn:hover { background: #9c531a; }
+    .promise { margin-top: 2rem; font-size: .85rem; color: #6b6b6b; }
+    .warn { background: #fce8e6; color: #8a1c12; padding: 1rem; border-radius: 10px;
+            text-align: left; font-size: .85rem; margin-bottom: 1.5rem; }
+    code { background: #efe9dd; padding: .1rem .35rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Good morning</h1>
+    <p class="sub">Inbox for <strong>{{ exec_id }}</strong></p>
+
+    {% if missing %}
+      <div class="warn">
+        Setup needed — these are not set in <code>.env</code>:
+        <ul>{% for m in missing %}<li><code>{{ m }}</code></li>{% endfor %}</ul>
+        See the README to finish setup before triaging.
+      </div>
+    {% endif %}
+
+    <a class="btn" href="{{ url_for('start') }}">Start my morning</a>
+
+    <p class="promise">
+      {% if not authed %}You'll approve Google access once.{% endif %}
+      Nothing is sent or moved — every action is proposed for your review.
+    </p>
+  </div>
+</body>
+</html>

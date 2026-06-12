@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Triage summary</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; background: #f4f1ea;
+           color: #2b2b2b; margin: 0; padding: 2rem; }
+    .wrap { max-width: 820px; margin: 0 auto; }
+    h1 { font-size: 1.4rem; }
+    .runbar { background: #fff; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+              display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: .9rem; box-shadow: 0 4px 16px rgba(0,0,0,.05); }
+    .runbar b { font-size: 1.2rem; display: block; }
+    .cat { margin-bottom: 1.5rem; }
+    .cat h2 { font-size: 1rem; text-transform: capitalize; border-bottom: 2px solid #d8cdb5;
+              padding-bottom: .3rem; }
+    .msg { background: #fff; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: .75rem;
+           box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .msg .from { color: #6b6b6b; font-size: .8rem; }
+    .msg .subject { font-weight: 600; margin: .2rem 0; }
+    .draft { background: #e6f4ea; border-radius: 8px; padding: .6rem .8rem; margin-top: .6rem;
+             font-size: .85rem; white-space: pre-wrap; }
+    .draft .label { color: #2e7d4f; font-weight: 600; font-size: .75rem; text-transform: uppercase; }
+    .empty { color: #999; font-style: italic; font-size: .85rem; }
+    a.back { color: #b5651d; text-decoration: none; }
+    .foot { color: #6b6b6b; font-size: .8rem; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="{{ url_for('index') }}">&larr; Back</a>
+    <h1>This morning's triage — {{ exec_id }}</h1>
+
+    {% if run %}
+    <div class="runbar">
+      <div><b>{{ run.pulled }}</b> pulled</div>
+      <div><b>{{ run.processed }}</b> newly sorted</div>
+      <div><b>{{ run.skipped_already_seen }}</b> already seen</div>
+      {% for c in categories %}<div><b>{{ run.counts[c] }}</b> {{ c.replace('_',' ') }}</div>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% for c in categories %}
+      {% if grouped[c] %}
+      <section class="cat">
+        <h2>{{ c.replace('_',' ') }}</h2>
+        {% for m in grouped[c] %}
+        <div class="msg">
+          <div class="from">{{ m.sender }} &middot; {{ m.received_at }}</div>
+          <div class="subject">{{ m.subject or '(no subject)' }}</div>
+          {% if m.draft %}
+            <div class="draft"><span class="label">Proposed reply</span><br>{{ m.draft }}</div>
+          {% else %}
+            <div class="empty">No reply proposed.</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+    {% endfor %}
+
+    <p class="foot">
+      Categorized by {{ model }}. Drafts are proposals only — nothing has been sent, moved, or deleted.
+    </p>
+  </div>
+</body>
+</html>

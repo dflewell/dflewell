@@ -1,0 +1,8 @@
+# Email Triage MVP — Python 3.11+
+flask==3.0.3
+anthropic==0.69.0
+google-api-python-client==2.149.0
+google-auth==2.35.0
+google-auth-oauthlib==1.2.1
+cryptography==43.0.1
+python-dotenv==1.0.1

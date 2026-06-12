@@ -66,5 +66,20 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
   (click → pull → categorize → propose → summary → exec approves). The showcase demo.
 - Phase 2+: coupon/expiry extraction, deeper search UI, supervised auto-handling, optional scheduling.
 
+## Build status (2026-06-12)
+- Codebase lives in repo at **`email-triage/`** (dflewell repo). Stack: **Python + Flask + SQLite +
+  Claude API**, chosen because it matches the accounting tool and is readable for a vibe coder.
+- **Phase 0 governance DONE** — `email-triage/governance/`: `DATA_FLOW.md` (mermaid), `DATA_HANDLING.md`
+  (store/where/how-long/how-to-delete), `CONSENT_SCRIPT.md`. These are the client-facing trust artifacts.
+- **Phase 1 scaffold DONE** — thin web button (`Start my morning`) + summary view; real OAuth flow,
+  Gmail pull, Claude structured-output classification, Fernet-encrypted SQLite store. Sends nothing.
+- **Interface decision:** thin web button FIRST (Darrell's call, 2026-06-12), overriding the CLI-first rec.
+- **Model decision pending Darrell:** code defaults to `claude-opus-4-8`; triage is high-volume so it's a
+  real cost lever. Cheaper options offered in `.env.example` (Sonnet 4.6, Haiku 4.5) via `TRIAGE_MODEL`.
+- **Encryption:** email bodies/subjects/drafts encrypted at rest with Fernet (`FERNET_KEY` per exec).
+  Metadata (sender, date, category) left queryable for de-dupe + summary.
+
 ## Next step
-Spec the MVP loop and the thin interface.
+- Darrell: pick the triage model (cost vs quality) and set `TRIAGE_MODEL`.
+- Run the loop against the wife's real Gmail (consent first) to test categorization quality.
+- Phase 2 backlog: coupon/expiry extraction, move/label actions (rung 2), searchable-archive UI.
