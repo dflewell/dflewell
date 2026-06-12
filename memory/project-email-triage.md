@@ -78,6 +78,9 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
   via `TRIAGE_MODEL` env var (Sonnet 4.6 / Opus 4.8 if quality lags). Revisit after testing on real mail.
 - **Deletion: DONE** — one-click `/delete` route (confirm page) removes the per-exec DB file + OAuth token,
   backing the deletion promise in `governance/DATA_HANDLING.md`. Linked from the start page.
+- **Consent deck: DONE** — `governance/consent-deck.html`, a self-contained 9-slide HTML deck (no deps,
+  arrow-key nav, F=fullscreen) for presenting the consent walkthrough. Built here (not Claude.ai) so it's
+  reusable, version-controlled collateral. Polish visuals in Claude.ai/slide tools later if wanted.
 - **Encryption:** email bodies/subjects/drafts encrypted at rest with Fernet (`FERNET_KEY` per exec).
   Metadata (sender, date, category) left queryable for de-dupe + summary.
 
