@@ -85,6 +85,23 @@ def summary():
     )
 
 
+@app.route("/delete", methods=["GET", "POST"])
+def delete():
+    """One-click delete of all stored data for this exec. GET shows a confirm
+    page; POST performs it (DB file + OAuth token). See governance/DATA_HANDLING.md."""
+    if request.method == "GET":
+        return render_template("delete.html", exec_id=config.EXEC_ID, done=None)
+
+    result = store.delete_all_data()
+    token_removed = gmail_client.remove_credentials()
+    session.pop("last_summary", None)
+    return render_template(
+        "delete.html",
+        exec_id=config.EXEC_ID,
+        done={"removed": result["removed"], "token_removed": token_removed},
+    )
+
+
 if __name__ == "__main__":
     store.init_db()
     app.run(host="127.0.0.1", port=5000, debug=True)

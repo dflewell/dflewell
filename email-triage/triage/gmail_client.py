@@ -30,6 +30,17 @@ def save_credentials(creds: Credentials) -> None:
         f.write(creds.to_json())
 
 
+def remove_credentials() -> bool:
+    """Delete the stored OAuth token so the tool can no longer reach Gmail.
+    The exec can also revoke independently in their Google security settings."""
+    import os
+
+    if os.path.exists(config.TOKEN_FILE):
+        os.remove(config.TOKEN_FILE)
+        return True
+    return False
+
+
 def _service(creds: Credentials):
     return build("gmail", "v1", credentials=creds, cache_discovery=False)
 

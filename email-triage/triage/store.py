@@ -65,6 +65,17 @@ def save_message(*, gmail_id, received_at, sender, category, subject, body, draf
         )
 
 
+def delete_all_data() -> dict:
+    """Delete this executive's entire stored history (the DB file). Backs the
+    deletion promise in governance/DATA_HANDLING.md item 1. Returns what was removed.
+    """
+    removed = []
+    if os.path.exists(config.DB_PATH):
+        os.remove(config.DB_PATH)
+        removed.append(config.DB_PATH)
+    return {"removed": removed}
+
+
 def load_recent(limit: int = 100) -> list[dict]:
     """Decrypt and return the most recently processed messages for the summary view."""
     f = _fernet()

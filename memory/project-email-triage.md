@@ -74,8 +74,10 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
 - **Phase 1 scaffold DONE** — thin web button (`Start my morning`) + summary view; real OAuth flow,
   Gmail pull, Claude structured-output classification, Fernet-encrypted SQLite store. Sends nothing.
 - **Interface decision:** thin web button FIRST (Darrell's call, 2026-06-12), overriding the CLI-first rec.
-- **Model decision pending Darrell:** code defaults to `claude-opus-4-8`; triage is high-volume so it's a
-  real cost lever. Cheaper options offered in `.env.example` (Sonnet 4.6, Haiku 4.5) via `TRIAGE_MODEL`.
+- **Model DECIDED (2026-06-12): `claude-haiku-4-5`** — cheapest, fine for sorting; Darrell's call. Switch
+  via `TRIAGE_MODEL` env var (Sonnet 4.6 / Opus 4.8 if quality lags). Revisit after testing on real mail.
+- **Deletion: DONE** — one-click `/delete` route (confirm page) removes the per-exec DB file + OAuth token,
+  backing the deletion promise in `governance/DATA_HANDLING.md`. Linked from the start page.
 - **Encryption:** email bodies/subjects/drafts encrypted at rest with Fernet (`FERNET_KEY` per exec).
   Metadata (sender, date, category) left queryable for de-dupe + summary.
 

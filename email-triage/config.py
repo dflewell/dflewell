@@ -11,9 +11,10 @@ FERNET_KEY = os.environ.get("FERNET_KEY", "")
 FLASK_SECRET = os.environ.get("FLASK_SECRET", "change-me")
 
 # --- Behavior ---
-# Default to the highest-quality model. Triage is high-volume, so this is a real
-# cost lever — see .env.example for cheaper options (Sonnet 4.6 / Haiku 4.5).
-TRIAGE_MODEL = os.environ.get("TRIAGE_MODEL", "claude-opus-4-8")
+# Default is Haiku 4.5 (Darrell's call, 2026-06-12) — triage is high-volume and
+# simple, so the cheapest model is the right economics for a free trust-builder.
+# Bump to Sonnet 4.6 or Opus 4.8 via TRIAGE_MODEL if categorization quality lags.
+TRIAGE_MODEL = os.environ.get("TRIAGE_MODEL", "claude-haiku-4-5")
 MAX_MESSAGES = int(os.environ.get("MAX_MESSAGES", "25"))
 
 # --- Gmail OAuth ---

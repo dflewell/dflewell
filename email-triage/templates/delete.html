@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delete my data</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; background: #f4f1ea;
+           color: #2b2b2b; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+    .card { background: #fff; padding: 2.5rem; border-radius: 16px; max-width: 460px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+    h1 { font-size: 1.3rem; margin-top: 0; }
+    p { color: #4b4b4b; line-height: 1.5; }
+    ul { color: #4b4b4b; }
+    .btn { background: #b5651d; color: #fff; border: none; font-size: 1rem;
+           padding: .8rem 2rem; border-radius: 999px; cursor: pointer; }
+    .btn.danger { background: #b3261e; }
+    .btn.danger:hover { background: #8a1c12; }
+    a.back { color: #b5651d; text-decoration: none; display: inline-block; margin-top: 1.25rem; }
+    .ok { background: #e6f4ea; color: #2e7d4f; padding: 1rem; border-radius: 10px; }
+    code { background: #efe9dd; padding: .1rem .35rem; border-radius: 4px; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    {% if done %}
+      <h1>Done — your data is deleted</h1>
+      <div class="ok">
+        {% if done.removed %}
+          Removed: {% for f in done.removed %}<code>{{ f }}</code>{% endfor %}.
+        {% else %}
+          No stored database was found (already clean).
+        {% endif %}
+        <br>OAuth token removed: <strong>{{ 'yes' if done.token_removed else 'none found' }}</strong>.
+      </div>
+      <p>The categorized history and stored email bodies for <strong>{{ exec_id }}</strong> are gone.
+         For complete assurance you can also revoke access in your Google Account &rarr;
+         <em>Security &rarr; Third-party access</em>.</p>
+      <a class="back" href="{{ url_for('index') }}">&larr; Back to start</a>
+    {% else %}
+      <h1>Delete all my data?</h1>
+      <p>This permanently deletes everything stored for <strong>{{ exec_id }}</strong>:</p>
+      <ul>
+        <li>The entire categorized history</li>
+        <li>All stored email bodies, subjects, and proposed drafts (encrypted at rest)</li>
+        <li>The saved Google access token</li>
+      </ul>
+      <p>Your actual Gmail is untouched. This cannot be undone.</p>
+      <form method="post">
+        <button class="btn danger" type="submit">Yes, delete everything</button>
+      </form>
+      <a class="back" href="{{ url_for('index') }}">&larr; Cancel</a>
+    {% endif %}
+  </div>
+</body>
+</html>
