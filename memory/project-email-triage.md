@@ -81,6 +81,10 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
 - **Consent deck: DONE** — `governance/consent-deck.html`, a self-contained 9-slide HTML deck (no deps,
   arrow-key nav, F=fullscreen) for presenting the consent walkthrough. Built here (not Claude.ai) so it's
   reusable, version-controlled collateral. Polish visuals in Claude.ai/slide tools later if wanted.
+- **Drive-friendly PDF: DONE** — `governance/consent-deck.pdf` (16:9, 9 pages) + generator
+  `governance/build_pdf.py` (reportlab; `pip install reportlab` then `python governance/build_pdf.py`).
+  Drive retired HTML web-hosting (2016) so HTML won't render from Drive — PDF does. For a live HTML
+  link instead, use Netlify Drop (not GitHub Pages — Pages would expose the whole repo).
 - **Encryption:** email bodies/subjects/drafts encrypted at rest with Fernet (`FERNET_KEY` per exec).
   Metadata (sender, date, category) left queryable for de-dupe + summary.
 
