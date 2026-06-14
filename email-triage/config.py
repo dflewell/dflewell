@@ -27,7 +27,9 @@ GMAIL_SCOPES = [
 ]
 CLIENT_SECRET_FILE = "client_secret.json"
 TOKEN_FILE = f"token_{EXEC_ID}.json"
-OAUTH_REDIRECT_URI = "http://localhost:5000/oauth2callback"
+# Port the app runs on. 5001 avoids macOS AirPlay Receiver, which occupies 5000.
+APP_PORT = int(os.environ.get("APP_PORT", "5001"))
+OAUTH_REDIRECT_URI = f"http://localhost:{APP_PORT}/oauth2callback"
 
 # --- Storage (per-exec, no commingling) ---
 DB_PATH = os.path.join("data", f"triage_{EXEC_ID}.db")

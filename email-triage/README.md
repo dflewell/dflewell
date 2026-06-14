@@ -33,7 +33,7 @@ Phase 1 MVP scaffold — Assisted rung (review-everything). Built per `../memory
    pip install -r requirements.txt
    ```
 2. **Google OAuth (consumer Gmail).** In Google Cloud Console: create an OAuth 2.0 Client ID
-   (type *Web application*), add redirect URI `http://localhost:5000/oauth2callback`, download
+   (type *Web application*), add redirect URI `http://localhost:5001/oauth2callback`, download
    the client secret JSON to `email-triage/client_secret.json`. Add the exec's Gmail as a test user.
 3. **Secrets.** Copy `.env.example` to `.env` and fill in:
    - `ANTHROPIC_API_KEY` — your Claude API key.
@@ -43,7 +43,7 @@ Phase 1 MVP scaffold — Assisted rung (review-everything). Built per `../memory
    ```
    python app.py
    ```
-   Open `http://localhost:5000`, click **Start my morning**, approve Google access once,
+   Open `http://localhost:5001`, click **Start my morning**, approve Google access once,
    then review the summary.
 
 ## What's stubbed vs real
