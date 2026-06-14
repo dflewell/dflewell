@@ -3,6 +3,8 @@ with Fernet; metadata used for de-duplication and the summary is left queryable.
 
 One DB file per exec (config.DB_PATH) — no commingling. See governance/DATA_HANDLING.md.
 """
+from __future__ import annotations
+
 import os
 import sqlite3
 from cryptography.fernet import Fernet

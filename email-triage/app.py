@@ -6,6 +6,8 @@ Routes:
   /oauth2callback    Google OAuth redirect target
   /summary           review the categorized results (proposals only; nothing sent)
 """
+from __future__ import annotations
+
 import os
 
 from flask import Flask, redirect, render_template, request, session, url_for

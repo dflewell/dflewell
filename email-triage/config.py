@@ -1,4 +1,6 @@
 """Central config. Reads from .env so secrets never live in code."""
+from __future__ import annotations
+
 import os
 from dotenv import load_dotenv
 

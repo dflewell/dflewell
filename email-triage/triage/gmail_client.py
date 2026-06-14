@@ -3,6 +3,8 @@
 The OAuth *flow* (redirect + callback) lives in app.py; this module just turns a
 stored token into a Gmail service and pulls overnight unread messages.
 """
+from __future__ import annotations
+
 import base64
 from email.utils import parsedate_to_datetime
 

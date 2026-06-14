@@ -1,6 +1,8 @@
 """The MVP loop: pull -> categorize -> propose -> store. Called when the exec
 presses the button. Read-only against Gmail; proposes drafts but sends nothing.
 """
+from __future__ import annotations
+
 from . import gmail_client, classifier, store
 import config
 

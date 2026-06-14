@@ -4,6 +4,8 @@ Uses structured outputs (a JSON schema) so the model must return one of our four
 categories — no free-text parsing. Body text is truncated before sending so we
 send the minimum needed to categorize (see governance/DATA_FLOW.md).
 """
+from __future__ import annotations
+
 import anthropic
 
 import config
