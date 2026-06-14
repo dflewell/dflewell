@@ -249,8 +249,45 @@ def slide_close():
     text(MARGIN, 430, "True North AI · governance-first by design.", "Helvetica", 16, MUTED)
 
 
+def slide_inference():
+    bg()
+    kicker("The sorting step, up close")
+    text(MARGIN, 100, "What happens when your email is sorted", "Helvetica-Bold", 28, INK)
+    steps = ["Your email text", "Read once", "Answer sent back", "Line goes quiet"]
+    x, y, h = MARGIN, 150, 52
+    for i, s in enumerate(steps):
+        w = c.stringWidth(s, "Helvetica-Bold", 14) + 32
+        card(x, y, w, h)
+        c.setFillColor(INK); c.setFont("Helvetica-Bold", 14)
+        c.drawString(x + 16, top(y) - 32, s)
+        x += w
+        if i < len(steps) - 1:
+            c.setFillColor(TERRA); c.setFont("Helvetica-Bold", 20)
+            c.drawString(x + 5, top(y) - 34, "→")
+            x += 30
+    bullets = [
+        ("Never used to train AI.",
+         "Under Anthropic's commercial terms, your email is not used to train their models."),
+        ("Read once, not kept around.",
+         "Each email is a separate request with no ongoing access; Anthropic deletes it within "
+         "about 30 days — or nothing is retained at all if we turn on Zero Data Retention."),
+        ("Encrypted the whole way.",
+         "The connection to Anthropic is encrypted end to end."),
+    ]
+    y = 235
+    for head, body in bullets:
+        c.setFillColor(TERRA); c.setFont("Helvetica-Bold", 16)
+        c.drawString(MARGIN, top(y) - 16, "•")
+        yh = text(MARGIN + 22, y, head, "Helvetica-Bold", 15, INK)
+        yb = text(MARGIN + 22, yh, body, "Helvetica", 14.5, BODY, max_w=PAGE_W - 2 * MARGIN - 22)
+        y = yb + 10
+    text(MARGIN, y + 4,
+         "True North AI covers the processing cost — nothing for you to set up or pay.",
+         "Helvetica-Oblique", 14, MUTED, max_w=PAGE_W - 2 * MARGIN)
+
+
 SLIDES = [slide_title, slide_promise, slide_loop, slide_buckets, slide_data,
-          slide_delete, slide_scope, slide_ladder, slide_close]
+          slide_inference, slide_delete, slide_scope, slide_ladder, slide_close]
 
 for n, fn in enumerate(SLIDES, 1):
     fn()

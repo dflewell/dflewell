@@ -85,6 +85,10 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
   `governance/build_pdf.py` (reportlab; `pip install reportlab` then `python governance/build_pdf.py`).
   Drive retired HTML web-hosting (2016) so HTML won't render from Drive — PDF does. For a live HTML
   link instead, use Netlify Drop (not GitHub Pages — Pages would expose the whole repo).
+- **Anthropic-step FAQ: DONE** — added plain-English "What happens when your email is sorted" as a
+  deck slide (now 10 slides, HTML + PDF) and a fuller section in `governance/DATA_FLOW.md`: round-trip
+  not upload, not used to train, ~30-day retention (ZDR option), whose-account/who-pays (default =
+  True North AI's key/cost; client can use own), ~$0.0015–0.002/email on Haiku 4.5.
 - **Encryption:** email bodies/subjects/drafts encrypted at rest with Fernet (`FERNET_KEY` per exec).
   Metadata (sender, date, category) left queryable for de-dupe + summary.
 
