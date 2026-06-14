@@ -92,6 +92,14 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
 - **Encryption:** email bodies/subjects/drafts encrypted at rest with Fernet (`FERNET_KEY` per exec).
   Metadata (sender, date, category) left queryable for de-dupe + summary.
 
+- **Consent gate: DONE (2026-06-14)** — chosen over DocuSign (proportionate for a free trust-builder;
+  consent enforced in code beats a signature in a separate file). `/consent` screen: required checkbox +
+  typed full name + auto UTC timestamp + policy version (`config.CONSENT_POLICY_VERSION`) + scopes,
+  saved to a `consents` table in the per-exec DB. `/start` and `/oauth2callback` refuse to run until
+  consent exists; `/withdraw` clears it (data kept unless full delete). Order: consent → Google auth →
+  triage. Route + store logic verified with Flask test client. DocuSign stays the upgrade for a future
+  paid/enterprise client.
+
 ## Next step
 - Darrell: pick the triage model (cost vs quality) and set `TRIAGE_MODEL`.
 - Run the loop against the wife's real Gmail (consent first) to test categorization quality.

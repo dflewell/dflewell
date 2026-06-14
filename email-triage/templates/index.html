@@ -36,10 +36,18 @@
     <a class="btn" href="{{ url_for('start') }}">Start my morning</a>
 
     <p class="promise">
-      {% if not authed %}You'll approve Google access once.{% endif %}
+      {% if not consent %}You'll be asked to consent once, then approve Google access once.
+      {% elif not authed %}You'll approve Google access once.{% endif %}
       Nothing is sent or moved — every action is proposed for your review.
     </p>
-    <p class="promise"><a href="{{ url_for('delete') }}" style="color:#b3261e;">Delete all my data</a></p>
+    {% if consent %}
+      <p class="promise" style="color:#2e7d4f;">✓ Consent on file: {{ consent.full_name }} ({{ consent.consented_at }} UTC)</p>
+    {% endif %}
+    <p class="promise">
+      <a href="{{ url_for('consent') }}" style="color:#6b6b6b;">Consent</a>
+      &middot;
+      <a href="{{ url_for('delete') }}" style="color:#b3261e;">Delete all my data</a>
+    </p>
   </div>
 </body>
 </html>

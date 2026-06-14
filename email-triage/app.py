@@ -32,16 +32,52 @@ def _flow() -> Flow:
 
 @app.route("/")
 def index():
+    store.init_db()
     missing = config.missing_secrets()
     authed = gmail_client.load_credentials() is not None
     return render_template(
-        "index.html", exec_id=config.EXEC_ID, authed=authed, missing=missing
+        "index.html", exec_id=config.EXEC_ID, authed=authed, missing=missing,
+        consent=store.active_consent(),
     )
+
+
+@app.route("/consent", methods=["GET", "POST"])
+def consent():
+    """Consent gate. The tool will not pull any mail until this is recorded."""
+    store.init_db()
+    existing = store.active_consent()
+    error = None
+    if request.method == "POST" and existing is None:
+        full_name = (request.form.get("full_name") or "").strip()
+        agreed = request.form.get("agree") == "on"
+        if full_name and agreed:
+            store.record_consent(
+                full_name, config.CONSENT_POLICY_VERSION, ", ".join(config.GMAIL_SCOPES)
+            )
+            return redirect(url_for("start"))
+        error = "Please tick the box and type your full name to consent."
+    return render_template(
+        "consent.html", exec_id=config.EXEC_ID,
+        policy_version=config.CONSENT_POLICY_VERSION, scopes=config.GMAIL_SCOPES,
+        existing=existing, error=error,
+    )
+
+
+@app.route("/withdraw", methods=["POST"])
+def withdraw():
+    """Withdraw consent. The tool refuses to run until re-consented; data is kept
+    unless the exec also uses Delete all my data."""
+    store.init_db()
+    store.withdraw_consent()
+    return redirect(url_for("consent"))
 
 
 @app.route("/start")
 def start():
-    """Button press. If not authed, send to Google; otherwise run the triage loop."""
+    """Button press. Consent first, then Google auth, then the triage loop."""
+    store.init_db()
+    if store.active_consent() is None:
+        return redirect(url_for("consent"))
     creds = gmail_client.load_credentials()
     if creds is None:
         flow = _flow()
@@ -58,6 +94,9 @@ def start():
 
 @app.route("/oauth2callback")
 def oauth2callback():
+    store.init_db()
+    if store.active_consent() is None:  # never run without recorded consent
+        return redirect(url_for("consent"))
     flow = _flow()
     flow.fetch_token(authorization_response=request.url)
     gmail_client.save_credentials(flow.credentials)

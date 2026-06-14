@@ -33,6 +33,10 @@ DB_PATH = os.path.join("data", f"triage_{EXEC_ID}.db")
 # Categories the triage sorts into. Order = display priority.
 CATEGORIES = ["client", "important", "shopping", "read_later"]
 
+# Consent policy version the exec agrees to. Bump this date when the governance
+# docs change materially, so consent records show exactly what was agreed to.
+CONSENT_POLICY_VERSION = "2026-06-14"
+
 
 def missing_secrets() -> list[str]:
     """Return names of required secrets that aren't set, for a friendly startup check."""

@@ -34,6 +34,18 @@ def init_db() -> None:
             )
             """
         )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS consents (
+                id             INTEGER PRIMARY KEY AUTOINCREMENT,
+                full_name      TEXT,              -- typed by the exec as their consent
+                policy_version TEXT,              -- which governance policy they agreed to
+                scopes         TEXT,              -- Gmail scopes consented to
+                consented_at   TEXT DEFAULT (datetime('now')),
+                withdrawn_at   TEXT               -- set when consent is withdrawn
+            )
+            """
+        )
 
 
 def already_seen(gmail_id: str) -> bool:
@@ -63,6 +75,45 @@ def save_message(*, gmail_id, received_at, sender, category, subject, body, draf
                 f.encrypt((draft or "").encode()),
             ),
         )
+
+
+def record_consent(full_name: str, policy_version: str, scopes: str) -> None:
+    """Record the exec's consent. Gates the tool — no mail is pulled without it."""
+    with sqlite3.connect(config.DB_PATH) as conn:
+        conn.execute(
+            "INSERT INTO consents (full_name, policy_version, scopes) VALUES (?, ?, ?)",
+            (full_name.strip(), policy_version, scopes),
+        )
+
+
+def active_consent() -> dict | None:
+    """Return the current (non-withdrawn) consent record, or None if not consented."""
+    with sqlite3.connect(config.DB_PATH) as conn:
+        row = conn.execute(
+            """
+            SELECT full_name, policy_version, scopes, consented_at
+            FROM consents WHERE withdrawn_at IS NULL
+            ORDER BY id DESC LIMIT 1
+            """
+        ).fetchone()
+    if not row:
+        return None
+    return {
+        "full_name": row[0],
+        "policy_version": row[1],
+        "scopes": row[2],
+        "consented_at": row[3],
+    }
+
+
+def withdraw_consent() -> bool:
+    """Withdraw any active consent. The tool will refuse to run until re-consented.
+    (Separate from delete_all_data, which removes the whole database.)"""
+    with sqlite3.connect(config.DB_PATH) as conn:
+        cur = conn.execute(
+            "UPDATE consents SET withdrawn_at = datetime('now') WHERE withdrawn_at IS NULL"
+        )
+        return cur.rowcount > 0
 
 
 def delete_all_data() -> dict:

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consent — Email Triage</title>
+  <style>
+    body { font-family:-apple-system,system-ui,sans-serif; background:#f4f1ea; color:#2b2b2b;
+           display:grid; place-items:center; min-height:100vh; margin:0; padding:2rem; }
+    .card { background:#fff; padding:2.5rem 2.75rem; border-radius:16px; max-width:560px;
+            box-shadow:0 8px 30px rgba(0,0,0,.08); }
+    h1 { font-size:1.4rem; margin:0 0 .25rem; }
+    .sub { color:#6b6b6b; margin:0 0 1.5rem; }
+    ul { line-height:1.6; color:#3a3a3a; padding-left:1.2rem; }
+    ul b { color:#2b2b2b; }
+    .meta { background:#efe9dd; border-radius:10px; padding:.75rem 1rem; font-size:.85rem;
+            color:#4b4b4b; margin:1.25rem 0; }
+    label.agree { display:flex; gap:.6rem; align-items:flex-start; margin:1.25rem 0; font-size:.95rem; }
+    input[type=text] { width:100%; padding:.7rem .9rem; font-size:1rem; border:1px solid #cbbfa6;
+                       border-radius:8px; box-sizing:border-box; }
+    .name-label { font-size:.85rem; color:#6b6b6b; display:block; margin:1rem 0 .4rem; }
+    .btn { background:#b5651d; color:#fff; border:none; font-size:1rem; padding:.8rem 2rem;
+           border-radius:999px; cursor:pointer; margin-top:1.25rem; }
+    .btn:hover { background:#9c531a; }
+    .err { background:#fce8e6; color:#8a1c12; padding:.7rem 1rem; border-radius:8px; font-size:.9rem; }
+    .ok { background:#e6f4ea; color:#2e7d4f; padding:1rem; border-radius:10px; }
+    .withdraw { background:none; border:1px solid #b3261e; color:#b3261e; border-radius:999px;
+                padding:.5rem 1.25rem; font-size:.85rem; cursor:pointer; }
+    a.back { color:#b5651d; text-decoration:none; display:inline-block; margin-top:1.25rem; }
+    code { background:#efe9dd; padding:.1rem .35rem; border-radius:4px; font-size:.8rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    {% if existing %}
+      <h1>Consent on file</h1>
+      <p class="sub">For <strong>{{ exec_id }}</strong></p>
+      <div class="ok">
+        <strong>{{ existing.full_name }}</strong> consented on
+        <strong>{{ existing.consented_at }} UTC</strong>.<br>
+        Policy version <code>{{ existing.policy_version }}</code> &middot; access: <code>{{ existing.scopes }}</code>
+      </div>
+      <p class="sub" style="margin-top:1.25rem;">You can withdraw consent at any time. The tool will
+        then refuse to run until consent is given again. Your stored data is kept unless you also use
+        <em>Delete all my data</em>.</p>
+      <form method="post" action="{{ url_for('withdraw') }}">
+        <button class="withdraw" type="submit">Withdraw consent</button>
+      </form>
+      <a class="back" href="{{ url_for('index') }}">&larr; Back to start</a>
+    {% else %}
+      <h1>Before we begin — your consent</h1>
+      <p class="sub">For <strong>{{ exec_id }}</strong>. Nothing is accessed until you consent below.</p>
+
+      {% if error %}<div class="err">{{ error }}</div>{% endif %}
+
+      <p>By consenting, you understand and agree that this tool will:</p>
+      <ul>
+        <li>Read your overnight unread Gmail <b>only when you press the button</b> — never in the background.</li>
+        <li>Send each message's text to Anthropic's Claude API to sort it and draft replies — <b>in transit only, not used to train AI</b>.</li>
+        <li>Keep a categorized copy in a <b>private database, with email bodies encrypted</b> — yours alone, not shared.</li>
+        <li><b>Propose only</b> — it will not send, delete, or move anything without your review.</li>
+        <li>Be fully <b>deletable on request</b>, and you can revoke access in your Google settings anytime.</li>
+      </ul>
+
+      <div class="meta">
+        Policy version <code>{{ policy_version }}</code> &middot;
+        Access requested: <code>{{ scopes | join(', ') }}</code>
+      </div>
+
+      <form method="post">
+        <label class="agree">
+          <input type="checkbox" name="agree">
+          <span>I have read and understood the above (and the data-flow &amp; data-handling sheets), and I consent.</span>
+        </label>
+        <label class="name-label">Type your full name to consent:</label>
+        <input type="text" name="full_name" placeholder="Full name" autocomplete="off">
+        <br>
+        <button class="btn" type="submit">I consent — continue</button>
+      </form>
+      <a class="back" href="{{ url_for('index') }}">&larr; Cancel</a>
+    {% endif %}
+  </div>
+</body>
+</html>
