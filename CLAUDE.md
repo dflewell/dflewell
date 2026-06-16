@@ -29,6 +29,12 @@ Key facts (so future sessions don't re-discover):
 - Schedule: weekdays ~8:00 PM Pacific, configured in the Claude Code web app
   scheduling UI (not in code). Scheduled session needs the Gmail + Drive MCPs
   connected to work.
+- **Drive write-permission gotcha:** the Drive write/create approval prompt is
+  **session-scoped**. If it's dismissed (not explicitly accepted), it caches as a
+  denial and subsequent Drive writes **fail silently** — the sweep can extract
+  expenses but can't save them. Fix: start a **fresh session** so the prompt
+  reappears and accept it (or toggle it in connector settings if available). No
+  code change needed. Reads are unaffected; this only bites Drive writes.
 
 ## Reimbursable client expenses
 Out-of-pocket costs (mostly travel) that True North bills back to a client. Full
