@@ -29,7 +29,12 @@ Accounting Stuff/
 
 ## Sweep step (runs with the daily sweep — see SWEEP_SOP.md step 9)
 For each label matching `Reimbursable - *` with unread items:
-1. **Find new items:** `label:"Reimbursable - ClientName" is:unread`.
+1. **Find new items.** The label-scoped query (`label:"Reimbursable - ClientName"
+   is:unread`) is **unreliable — it returns nothing** (both the name form and the
+   label-ID form failed in testing). **Use the broad-unread fallback instead:**
+   search `is:unread newer_than:14d`, then keep only messages whose `labelIds`
+   include the client's `Reimbursable - *` label ID (get IDs via `list_labels`,
+   e.g. NOD_Apiary = `Label_674860876351278967`).
 2. **Read** each thread; extract: `date, vendor, description, category, amount,
    currency, receipt ref`. Travel categories: Airfare, Lodging, Ground transport,
    Meals, Other.

@@ -43,6 +43,12 @@ established (Option A — review-first).
    (one per client) with unread items, and process them per
    **`accounting/REIMBURSABLE_SOP.md`**. These are client-billable costs, NOT True
    North operating expenses — handle them separately.
+   - **Discovery quirk:** the `label:"Reimbursable - *" is:unread` query returns
+     nothing (label-ID form fails too). Use the broad-unread fallback: search
+     `is:unread newer_than:14d`, then filter messages whose `labelIds` contain a
+     `Reimbursable - *` label ID (from `list_labels`). The main `Accounting stuff`
+     label query in step 1 works fine — this quirk only affects the reimbursable
+     labels.
 
 ## Vendor → Xero account mapping (suggestions)
 | Vendor | Suggested Xero account |

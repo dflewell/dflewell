@@ -41,6 +41,12 @@ Out-of-pocket costs (mostly travel) that True North bills back to a client. Full
 procedure: **`accounting/REIMBURSABLE_SOP.md`**. NOT operating expenses — they
 pass through to the client invoice as a line item.
 - Intake: one Gmail label per client, **`Reimbursable - ClientName`**.
+- **Discovery quirk (confirmed 2026-06-16):** `label:"Reimbursable - *" is:unread`
+  returns nothing — even the label-ID form fails. A scheduled sweep using that
+  query would silently find zero items. **Fallback:** search `is:unread
+  newer_than:14d`, then filter messages whose `labelIds` contain the client's
+  `Reimbursable - *` ID (e.g. NOD_Apiary = `Label_674860876351278967`). The main
+  `Accounting stuff` label query is unaffected.
 - Storage: **Drive only** (no repo CSV). Layout under `Accounting Stuff/Reimbursable/
   ClientName/`: `items/` (one file per expense), `reports/` (billing reports),
   `receipts/` (PDFs auto-saved by the Apps Script).
