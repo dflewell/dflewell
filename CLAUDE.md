@@ -38,6 +38,7 @@ pass through to the client invoice as a line item.
 - Storage: **Drive only** (no repo CSV). Layout under `Accounting Stuff/Reimbursable/
   ClientName/`: `items/` (one file per expense), `reports/` (billing reports),
   `receipts/` (PDFs auto-saved by the Apps Script).
+- **Xero account:** Other Receivables — acct 1310 (balance sheet; clears when client pays invoice).
 - **Drive MCP is create+read only** (no update/delete) → design is create-only:
   one file per expense; billed status derived by reading prior reports.
 - Sweep handles these in SWEEP_SOP.md step 9; reports generated on demand via

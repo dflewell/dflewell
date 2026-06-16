@@ -64,11 +64,12 @@ Run when you're ready to bill a client. Prompt:
 - Supporting docs live in `…/ClientName/receipts/` — share that folder or attach
   the relevant PDFs.
 
-## Xero treatment (brief — confirm against your setup)
-- Record each reimbursable cost as a **billable expense assigned to the customer**
-  so it can be pulled onto the client invoice; the reimbursement income offsets it,
-  netting ~zero to P&L. (Or use a balance-sheet clearing account if you prefer.)
-- The client invoice carries the reimbursement as its own line item.
+## Xero treatment
+- Post each reimbursable cost to **Other Receivables — account 1310** (balance sheet).
+- When the client pays the invoice line item, the receipt clears account 1310.
+- Net P&L impact = zero; the cost never flows through the income statement.
+- The client invoice carries the reimbursement as its own line item with the
+  expense report attached as supporting documentation.
 
 ## Open enhancement
 If volume grows, a Xero connected app (OAuth) could push these straight to Xero as
