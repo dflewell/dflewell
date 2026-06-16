@@ -39,6 +39,10 @@ established (Option A — review-first).
    `accounting/reports/YYYY-MM-DD-sweep.md`.
 8. **Mark processed** — remove the `UNREAD` label from each processed message via
    `unlabel_message` with `labelIds: ["UNREAD"]`. The next sweep then ignores them.
+9. **Reimbursable expenses** — also check for any labels named `Reimbursable - *`
+   (one per client) with unread items, and process them per
+   **`accounting/REIMBURSABLE_SOP.md`**. These are client-billable costs, NOT True
+   North operating expenses — handle them separately.
 
 ## Vendor → Xero account mapping (suggestions)
 | Vendor | Suggested Xero account |
@@ -66,27 +70,40 @@ folder named **`Accounting Stuff`**, which the sweep reads via the Drive tools.
    so new attachments land in Drive before the evening sweep.
 
 ```javascript
-function saveAccountingAttachments() {
-  var labelName = 'Accounting stuff';
-  var folderName = 'Accounting Stuff';
-  var label = GmailApp.getUserLabelByName(labelName);
-  if (!label) return;
+// Helper: get a folder by name under a parent, creating it if missing.
+function getOrCreateFolder(parent, name) {
+  var it = parent.getFoldersByName(name);
+  return it.hasNext() ? it.next() : parent.createFolder(name);
+}
 
-  // Find/create the Drive folder.
-  var folders = DriveApp.getFoldersByName(folderName);
-  var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
-
-  // Only process threads that still have an attachment we haven't saved.
-  var threads = label.getThreads(0, 100);
-  threads.forEach(function (thread) {
-    thread.getMessages().forEach(function (msg) {
-      msg.getAttachments().forEach(function (att) {
-        if (att.getContentType() !== 'application/pdf') return;
-        // De-dupe by filename so re-runs don't pile up copies.
-        var existing = folder.getFilesByName(att.getName());
-        if (!existing.hasNext()) folder.createFile(att);
-      });
+// Save PDF attachments from a thread into a target folder, de-duped by filename.
+function savePdfs(thread, folder) {
+  thread.getMessages().forEach(function (msg) {
+    msg.getAttachments().forEach(function (att) {
+      if (att.getContentType() !== 'application/pdf') return;
+      if (!folder.getFilesByName(att.getName()).hasNext()) folder.createFile(att);
     });
+  });
+}
+
+function saveAccountingAttachments() {
+  // Root "Accounting Stuff" folder.
+  var roots = DriveApp.getFoldersByName('Accounting Stuff');
+  var root = roots.hasNext() ? roots.next() : DriveApp.createFolder('Accounting Stuff');
+
+  // 1) Operating-expense receipts from the main label -> root folder.
+  var main = GmailApp.getUserLabelByName('Accounting stuff');
+  if (main) main.getThreads(0, 100).forEach(function (t) { savePdfs(t, root); });
+
+  // 2) Reimbursable receipts: any label named "Reimbursable - ClientName"
+  //    -> Reimbursable/ClientName/receipts/.
+  var reimb = getOrCreateFolder(root, 'Reimbursable');
+  GmailApp.getUserLabels().forEach(function (label) {
+    var name = label.getName();
+    if (name.indexOf('Reimbursable - ') !== 0) return;
+    var client = name.substring('Reimbursable - '.length).trim();
+    var receipts = getOrCreateFolder(getOrCreateFolder(reimb, client), 'receipts');
+    label.getThreads(0, 100).forEach(function (t) { savePdfs(t, receipts); });
   });
 }
 ```

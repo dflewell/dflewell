@@ -30,5 +30,19 @@ Key facts (so future sessions don't re-discover):
   scheduling UI (not in code). Scheduled session needs the Gmail + Drive MCPs
   connected to work.
 
+## Reimbursable client expenses
+Out-of-pocket costs (mostly travel) that True North bills back to a client. Full
+procedure: **`accounting/REIMBURSABLE_SOP.md`**. NOT operating expenses — they
+pass through to the client invoice as a line item.
+- Intake: one Gmail label per client, **`Reimbursable - ClientName`**.
+- Storage: **Drive only** (no repo CSV). Layout under `Accounting Stuff/Reimbursable/
+  ClientName/`: `items/` (one file per expense), `reports/` (billing reports),
+  `receipts/` (PDFs auto-saved by the Apps Script).
+- **Drive MCP is create+read only** (no update/delete) → design is create-only:
+  one file per expense; billed status derived by reading prior reports.
+- Sweep handles these in SWEEP_SOP.md step 9; reports generated on demand via
+  prompt `Generate expense report for ClientName`.
+- Apps Script (in SWEEP_SOP.md) now also saves reimbursable receipt PDFs per client.
+
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
