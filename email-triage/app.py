@@ -87,6 +87,7 @@ def start():
             access_type="offline", include_granted_scopes="true", prompt="consent"
         )
         session["oauth_state"] = state
+        session["code_verifier"] = flow.code_verifier  # PKCE secret; needed at callback
         return redirect(auth_url)
 
     summary = run_triage(creds)
@@ -100,6 +101,7 @@ def oauth2callback():
     if store.active_consent() is None:  # never run without recorded consent
         return redirect(url_for("consent"))
     flow = _flow()
+    flow.code_verifier = session.get("code_verifier")  # restore PKCE verifier from /start
     flow.fetch_token(authorization_response=request.url)
     gmail_client.save_credentials(flow.credentials)
     # Now that we're authed, run the triage the button was asking for.
