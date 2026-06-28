@@ -100,7 +100,23 @@ expiry) getting lost; poor native search; inability to keep up. Target users: ex
   triage. Route + store logic verified with Flask test client. DocuSign stays the upgrade for a future
   paid/enterprise client.
 
+## First live run — SUCCESS (2026-06-14)
+- Full loop verified end-to-end against the wife's real Gmail: consent → OAuth → pull → Haiku
+  classify → encrypted store → summary. Setup gotchas hit + fixed along the way (record so future
+  Mac deployments are smooth):
+  - macOS system Python was 3.9; added `from __future__ import annotations` for compat, but proper
+    fix is Python 3.11+ (brew or python.org).
+  - **App moved to port 5001** — macOS AirPlay Receiver occupies 5000 (`localhost:5000` → 403).
+    OAuth redirect URI must be `http://localhost:5001/oauth2callback`.
+  - **OAuth PKCE fix:** persist `code_verifier` in session between `/start` and `/oauth2callback`
+    (separate Flow objects were dropping it → "Missing code verifier").
+  - Google OAuth app is in **Testing** → expect the "unverified app → Advanced → Continue" screen;
+    exec's Gmail must be added as a Test user.
+- Result: 25 msgs (=MAX_MESSAGES cap), 3 Google security alerts→important, 6 shopping, rest
+  read_later, **no drafts (correct)**. Sorting looked sound on Haiku 4.5.
+- NOT yet tested: **client** bucket (no client mail in a personal inbox — the key category for real
+  exec deployments), draft generation on mail that needs a reply, coupon/expiry extraction.
+
 ## Next step
 - Darrell: pick the triage model (cost vs quality) and set `TRIAGE_MODEL`.
-- Run the loop against the wife's real Gmail (consent first) to test categorization quality.
 - Phase 2 backlog: coupon/expiry extraction, move/label actions (rung 2), searchable-archive UI.
