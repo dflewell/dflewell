@@ -44,5 +44,17 @@ pass through to the client invoice as a line item.
   prompt `Generate expense report for ClientName`.
 - Apps Script (in SWEEP_SOP.md) now also saves reimbursable receipt PDFs per client.
 
+## New client prep (research + first meeting)
+Turns a warm introduction into a researched, professional first meeting. Full
+procedure: **`clients/CLIENT_PREP_SOP.md`**; brief template: `clients/BRIEF_TEMPLATE.md`.
+- **Positioning lens:** True North's core offering is **AI strategy & adoption**;
+  finance depth (CMA) and AWS certs are credibility anchors, not separate service lines.
+- Research is **public info only** (WebSearch/WebFetch); LinkedIn profile pages
+  usually can't be fetched — rely on search snippets. Label facts vs. inferences; cite sources.
+- Storage: finished brief goes to **Google Drive** `Clients/<Company>/<date>-<Company>-prep.md`
+  (Drive MCP create+read only → one file per meeting).
+- On-demand. Kick off with: _"New client prep per clients/CLIENT_PREP_SOP.md — introduced to
+  <Name>, <Title> at <Company>, meeting <date>, context: <...>."_
+
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
