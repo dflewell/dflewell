@@ -30,6 +30,12 @@ plausibly create value, and how does True North's mix (AI + finance + cloud) fit
 - Meeting logistics — if a calendar invite exists, pull it via Google Calendar
   (`list_events` / `get_event`) for time, attendees, and any agenda notes.
 
+**Kicking it off:** the intro itself is usually enough to start — an intro email
+**PDF dropped in the shared Drive folder** is a valid input; read it with the Drive
+`read_file_content` tool (or the `contentSnippet` from `search_files`). No separate
+session needed — run the whole routine in one go. If the intro lives in Gmail
+instead, pull it via the Gmail tools; pasted text works too.
+
 ## Procedure
 1. **Log the intake.** Note the inputs above. Confirm exact spelling of name/company
    (misspellings wreck search quality).
@@ -69,11 +75,17 @@ plausibly create value, and how does True North's mix (AI + finance + cloud) fit
      help → next steps.
    - **Watch-outs** — anything sensitive to avoid; unknowns to confirm live.
 
-6. **Output the brief.** Fill `clients/BRIEF_TEMPLATE.md`. Save to **Google Drive**:
-   folder path `Clients/<Company>/`, filename
-   `<YYYY-MM-DD>-<Company>-prep.md` (date = meeting date if known, else today).
-   Create via the Drive `create_file` tool. (Drive MCP is **create+read only** — one
-   file per meeting; never expect to update in place.)
+6. **Output the brief.** Fill `clients/BRIEF_TEMPLATE.md`. Save to **Google Drive**
+   under the shared **Clients** parent folder: create a `<Company>/` subfolder
+   (via `create_file` with mime type `application/vnd.google-apps.folder`), then
+   create the brief inside it titled `<YYYY-MM-DD>-<Company>-prep`
+   (date = meeting date if known, else today). Drive MCP is **create+read only** —
+   one file per meeting; never expect to update in place.
+   - **Save as a Google Doc** (omit `disableConversionToGoogleType`) so it's
+     readable on mobile before the meeting — not a raw `.md`.
+   - **Confidence markers:** Google Docs don't render emoji-in-markdown cleanly, so
+     use plain-text tags in the Doc: `[OK]` verified · `[?]` inferred · `[!]` watch-out.
+     (The repo template uses ✅/🔎 — swap to the tags when writing to a Doc.)
    - Cite sources inline (URLs) so claims are traceable and Darrell can dig deeper.
    - Flag anything **unverified / inferred** explicitly — do not state guesses as fact.
 

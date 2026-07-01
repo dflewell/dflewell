@@ -51,8 +51,11 @@ procedure: **`clients/CLIENT_PREP_SOP.md`**; brief template: `clients/BRIEF_TEMP
   finance depth (CMA) and AWS certs are credibility anchors, not separate service lines.
 - Research is **public info only** (WebSearch/WebFetch); LinkedIn profile pages
   usually can't be fetched — rely on search snippets. Label facts vs. inferences; cite sources.
-- Storage: finished brief goes to **Google Drive** `Clients/<Company>/<date>-<Company>-prep.md`
-  (Drive MCP create+read only → one file per meeting).
+- Storage: finished brief goes to **Google Drive** under the shared **Clients**
+  parent folder → `<Company>/<date>-<Company>-prep`, saved as a **Google Doc**
+  (mobile-readable). Confidence markers in the Doc: `[OK]`/`[?]`/`[!]`.
+  Drive MCP create+read only → one file per meeting.
+- Intro PDF in the shared Drive folder is a valid kickoff input; runs in one session.
 - On-demand. Kick off with: _"New client prep per clients/CLIENT_PREP_SOP.md — introduced to
   <Name>, <Title> at <Company>, meeting <date>, context: <...>."_
 
