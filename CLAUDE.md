@@ -44,5 +44,23 @@ pass through to the client invoice as a line item.
   prompt `Generate expense report for ClientName`.
 - Apps Script (in SWEEP_SOP.md) now also saves reimbursable receipt PDFs per client.
 
+## Client: CAMBP (California Master Beekeeper Program, UC Davis)
+Consulting client. Program under UC Davis (Dr. Elina L. Niño); Co-Manager
+**Wendy Mather** (wmather@ucdavis.edu). Work lives in the **CAMBP @ UC Davis**
+shared Drive (Drive ID `0AIV7hgJc0xjIUk9PVA`); main working folder "CAMBP UC
+Davis" = `1V7ZYPGORS4m03d9CYOhgmb4ZcBqflUiA`. Read `CAMBP_Project_README.md`
+(file `1GqqKDWZkZ3FffK9JyNAOYDPuHCsqBR0E`) at the start of CAMBP chats.
+- Tone for CAMBP: concise, person-centered/strengths-based, plain language;
+  create docs only when asked.
+- Key files: Waiver `1udvid11VG6ExhxvmBdG24QJvyyzxXi_c`; Safety policy
+  `1K51gXkieYUXnEAS3VfvPhk8cFPdIx8jD`; Core Curriculum slides
+  `1581bkBbMl0X6jI1nl0s2TILFGovcNGNEG_UTTPA7Tlc`.
+- **Waiver/EpiPen legal analysis (2026-07-02):** `1ZDuTSoq1IRbz3JNdTPDIHmFIcpZYm0qAm94g48HDt5k`.
+  Findings: CA law does NOT ban lay EpiPen use — Good Samaritan (H&S §1799.102)
+  + authorized-entity/lay-rescuer framework (H&S §1797.197a, Civ §1714.23).
+  Waiver's Epinephrine Authorization page over-promises vs. reality → remove it
+  unless CAMBP builds a §1797.197a program. Never charge for emergency care
+  (breaks immunity). NOT legal advice — supports UC counsel discussion.
+
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
