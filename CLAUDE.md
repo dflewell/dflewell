@@ -55,11 +55,17 @@ Davis" = `1V7ZYPGORS4m03d9CYOhgmb4ZcBqflUiA`. Read `CAMBP_Project_README.md`
 - Key files: Waiver `1udvid11VG6ExhxvmBdG24QJvyyzxXi_c`; Safety policy
   `1K51gXkieYUXnEAS3VfvPhk8cFPdIx8jD`; Core Curriculum slides
   `1581bkBbMl0X6jI1nl0s2TILFGovcNGNEG_UTTPA7Tlc`.
-- **Storage:** all CAMBP work lives in the **CAMBP @ UC Davis shared drive**
-  (`0AIV7hgJc0xjIUk9PVA`), working folder "CAMBP UC Davis"
-  (`1V7ZYPGORS4m03d9CYOhgmb4ZcBqflUiA`). Darrell prefers a **shared-drive
-  structure** (not My Drive) for Claude projects — create new project files in
-  the relevant shared drive folder by default.
+- **Storage:** all CAMBP work belongs in the **CAMBP @ UC Davis shared drive**
+  (`0AIV7hgJc0xjIUk9PVA`). Subfolders there: **Event Waivers**
+  (`1vb2pA3UW7hMk1OmXrk-zpElWk7QzzV4y`) holds waiver/EpiPen deliverables; README
+  + Core Curriculum shortcut live at the drive root. Darrell prefers a
+  **shared-drive structure** (not My Drive) for Claude projects — create new
+  project files directly in the relevant shared drive folder.
+- **GOTCHA:** folder `1V7ZYPGORS4m03d9CYOhgmb4ZcBqflUiA` ("CAMBP UC Davis") is in
+  **My Drive** (under "AI Clients"), NOT the shared drive, despite the similar
+  name. Do not create new CAMBP files there. The Drive MCP can copy/create/read
+  but cannot move or delete — so create files in the correct shared-drive folder
+  from the start (copying to relocate changes file IDs).
 - **Waiver/EpiPen work (2026-07-02) — deliverables in the CAMBP folder:**
   - Legal Alignment Analysis: `1ZDuTSoq1IRbz3JNdTPDIHmFIcpZYm0qAm94g48HDt5k`
   - Combined Waiver — Revised Draft: `1sTetWaLErOowRaMl23nFcSdTjaCnz0jnn1mmQFaZ_6Y`
