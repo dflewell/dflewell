@@ -55,12 +55,21 @@ Davis" = `1V7ZYPGORS4m03d9CYOhgmb4ZcBqflUiA`. Read `CAMBP_Project_README.md`
 - Key files: Waiver `1udvid11VG6ExhxvmBdG24QJvyyzxXi_c`; Safety policy
   `1K51gXkieYUXnEAS3VfvPhk8cFPdIx8jD`; Core Curriculum slides
   `1581bkBbMl0X6jI1nl0s2TILFGovcNGNEG_UTTPA7Tlc`.
-- **Waiver/EpiPen legal analysis (2026-07-02):** `1ZDuTSoq1IRbz3JNdTPDIHmFIcpZYm0qAm94g48HDt5k`.
-  Findings: CA law does NOT ban lay EpiPen use — Good Samaritan (H&S §1799.102)
-  + authorized-entity/lay-rescuer framework (H&S §1797.197a, Civ §1714.23).
-  Waiver's Epinephrine Authorization page over-promises vs. reality → remove it
-  unless CAMBP builds a §1797.197a program. Never charge for emergency care
-  (breaks immunity). NOT legal advice — supports UC counsel discussion.
+- **Storage:** all CAMBP work lives in the **CAMBP @ UC Davis shared drive**
+  (`0AIV7hgJc0xjIUk9PVA`), working folder "CAMBP UC Davis"
+  (`1V7ZYPGORS4m03d9CYOhgmb4ZcBqflUiA`). Darrell prefers a **shared-drive
+  structure** (not My Drive) for Claude projects — create new project files in
+  the relevant shared drive folder by default.
+- **Waiver/EpiPen work (2026-07-02) — deliverables in the CAMBP folder:**
+  - Legal Alignment Analysis: `1ZDuTSoq1IRbz3JNdTPDIHmFIcpZYm0qAm94g48HDt5k`
+  - Combined Waiver — Revised Draft: `1sTetWaLErOowRaMl23nFcSdTjaCnz0jnn1mmQFaZ_6Y`
+  - Event Waiver Addendum (AVMA @ SCREC, Jul 12): `1t9zMlfOBzyRjEr0rteOIgfFtv2pVY8S1Gf2sFDIDTVY`
+  - Site Emergency Action Plan (Jul 12): `1WRl55hlSDN7jsR1vCvIQrMndtJoR-Snde2g2WfXhDvI`
+  - Findings: CA law does NOT ban lay EpiPen use — Good Samaritan (H&S §1799.102)
+    + authorized-entity/lay-rescuer framework (H&S §1797.197a, Civ §1714.23).
+    Waiver's Epinephrine Authorization page over-promises vs. reality → remove it
+    unless CAMBP builds a §1797.197a program. Never charge for emergency care
+    (breaks immunity). NOT legal advice — supports UC counsel discussion.
 
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
