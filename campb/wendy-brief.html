@@ -129,9 +129,9 @@
 
   /* Bring list */
   .bring { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.4rem 1.5rem; }
-  .bring ul { list-style: none; margin: .4rem 0 0; padding: 0; display: grid; gap: .6rem; }
-  .bring li { display: grid; grid-template-columns: 1.3rem 1fr; gap: .6rem; align-items: baseline; }
-  .bring li::before { content: ""; width: .55rem; height: .55rem; margin-top: .45rem; border-radius: 2px; background: var(--accent); }
+  .bring ul { list-style: none; margin: .4rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .7rem; }
+  .bring li { display: flex; align-items: flex-start; gap: .7rem; line-height: 1.5; }
+  .bring li::before { content: ""; flex: 0 0 auto; width: .5rem; height: .5rem; margin-top: .5rem; border-radius: 2px; background: var(--accent); }
 
   .callout {
     display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start;
