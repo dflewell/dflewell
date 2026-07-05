@@ -44,5 +44,18 @@ pass through to the client invoice as a line item.
   prompt `Generate expense report for ClientName`.
 - Apps Script (in SWEEP_SOP.md) now also saves reimbursable receipt PDFs per client.
 
+## CampB — Wendy Mather file organization
+Project to inventory and organize Wendy Mather's files across **Carbonite,
+Dropbox, Google Drive, iCloud**. Strategy: **`campb/FILE_ORG_STRATEGY.md`**;
+catalog schema: `campb/INVENTORY_SCHEMA.md`.
+- **Goal = findability**, not freeing storage. Wendy's pain point is locating files.
+- **Final home = Google Drive** (Wendy owns/runs it after handoff).
+- **Roles:** Darrell runs tooling + guides; Wendy reviews and confirms deletions.
+- **Carbonite is urgent** — backup of a computer she no longer owns; may hold
+  critical files and can be purged after long inactivity. Rescue/restore first.
+- iCloud has no good API → pull down via a Mac/PC iCloud app before inventorying.
+- Inventory tooling: **rclone** (Dropbox + Drive listing/hashing/dedup); catalog
+  lives in an **Airtable** base "Wendy File Inventory" (or a Google Sheet).
+
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
