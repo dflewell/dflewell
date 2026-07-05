@@ -1,8 +1,9 @@
 # Wendy File Inventory — catalog schema
 
-The master catalog for Phase 2. Recommended home: an **Airtable base** ("Wendy
-File Inventory", single table "Files"). A Google Sheet with the same columns works
-too. One row = one file.
+The master catalog for Phase 2. Home: the **Airtable base "Wendy File Inventory"**
+(base `app693hLQifCoMCWH`, table `Files` `tblIDqr87hVGHUTU5`) — already created with
+the fields below. A Google Sheet with the same columns would work too. One row =
+one file. Load it via the `campb/RCLONE_RUNBOOK.md` steps.
 
 ## Fields
 | Field | Type | Notes |
