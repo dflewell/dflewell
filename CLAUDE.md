@@ -44,5 +44,30 @@ pass through to the client invoice as a line item.
   prompt `Generate expense report for ClientName`.
 - Apps Script (in SWEEP_SOP.md) now also saves reimbursable receipt PDFs per client.
 
+## CampB / CAMBP work (UC Davis)
+Consulting work for the **California Master Beekeeper Program** (UC Davis, Wendy
+Mather `wmather@ucdavis.edu`). Recurring ad-hoc tasks — e.g. waiver/safety-policy
+analysis, and matching event attendees to loaner **bee suits & equipment**.
+- Source docs arrive as PDFs/spreadsheets in a shared **Google Drive** folder
+  (e.g. "Bee Suits and Equipment", folder ID `1cGJpBwXxFaUsPucJt5c1Q1suv5H4KU5q`).
+  Test the Drive connector and read the folder at the start of each such task.
+- **Suit-matching deliverables** Darrell likes: (1) a Google **Sheet** pull list
+  in the same folder, (2) a **Gmail draft** to Wendy (never auto-send), (3) a
+  **printable labels PDF**, 4 labels per Letter page, cut-and-tape to suits.
+
+### Gotchas learned
+- **Labels PDF, keep it small.** Headless-Chrome `--print-to-pdf` embeds full
+  system fonts → ~700 KB, too big to inline as base64 for the Drive MCP upload.
+  Instead generate with **reportlab** using base-14 fonts (Helvetica/-Bold,
+  ZapfDingbats for the ▲) → ~14 KB, no font embedding. `pip install reportlab`
+  works here; render/verify pages with `pymupdf` (get_pixmap) then Read the PNG.
+- **Drive MCP is create+read only** (no update/delete). Can't replace/delete a
+  file → uploaded HTML+PDF both linger; just point Wendy at the PDF. Same reason
+  the **Gmail draft can't be updated** — creating a v2 leaves the v1 draft behind
+  (tell Darrell to discard the earlier one).
+- Upload non-Google files with `contentMimeType` + `disableConversionToGoogleType:true`
+  (else text/CSV/HTML get converted to Google Docs/Sheets). CSV uploaded *with*
+  conversion becomes a clean Google Sheet — quote every field (names are "Last, First").
+
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
