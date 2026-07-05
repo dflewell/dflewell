@@ -58,6 +58,8 @@
     .reveal { animation: rise .6s cubic-bezier(.2,.7,.3,1) both; }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   }
+  /* Static exports (PDF/PNG): skip the entrance animation so content prints at full opacity */
+  @media print { .reveal { animation: none !important; opacity: 1 !important; transform: none !important; } }
 
   /* Header */
   .eyebrow {
@@ -230,11 +232,11 @@
     <p class="section-note">One afternoon gets us through the rescue and the full inventory. A few things to have ready:</p>
     <div class="bring">
       <ul>
-        <li>Your <strong>MacBook</strong>, charged.</li>
-        <li>Logins for <strong>Carbonite, Dropbox, Google Drive, and your Apple ID</strong> — plus your phone for any verification codes.</li>
-        <li>An <strong>external hard drive</strong> if you have one (a safe place to land the Carbonite files).</li>
-        <li>A short list of the <strong>files you've been searching for</strong> — we'll confirm we've got them.</li>
-        <li>A sense of how you <strong>look for things</strong>: by client, by project, by year? No wrong answer — it shapes your folders.</li>
+        <li><span>Your <strong>MacBook</strong>, charged.</span></li>
+        <li><span>Logins for <strong>Carbonite, Dropbox, Google Drive, and your Apple ID</strong> — plus your phone for any verification codes.</span></li>
+        <li><span>An <strong>external hard drive</strong> if you have one (a safe place to land the Carbonite files).</span></li>
+        <li><span>A short list of the <strong>files you've been searching for</strong> — we'll confirm we've got them.</span></li>
+        <li><span>A sense of how you <strong>look for things</strong>: by client, by project, by year? No wrong answer — it shapes your folders.</span></li>
       </ul>
     </div>
     <div class="callout">
