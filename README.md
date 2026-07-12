@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @dflewell
-- 👀 I’m interested in Github and how it works
-- 🌱 I’m currently learning about Open Source Licensing and Open Source communities
-- 💞️ I’m looking to collaborate with any other business execs learning about licensing and open source program management (OSPO)
+- 👀 I’m a certified AI Governance Practitioner AIGP
+- 🌱 I understand Open Source Licensing and Open Source communities
+- 💞️ I’m looking to assist mission driven orgs with responsible human led AI implementations
 - 📫 How to reach me just look me up at True North AI LLC
 
 <!---
