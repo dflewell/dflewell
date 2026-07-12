@@ -58,6 +58,20 @@ procedure: **`clients/CLIENT_PREP_SOP.md`**; brief template: `clients/BRIEF_TEMP
 - Intro PDF in the shared Drive folder is a valid kickoff input; runs in one session.
 - On-demand. Kick off with: _"New client prep per clients/CLIENT_PREP_SOP.md — introduced to
   <Name>, <Title> at <Company>, meeting <date>, context: <...>."_
+## CampB — Wendy Mather file organization
+Project to inventory and organize Wendy Mather's files across **Carbonite,
+Dropbox, Google Drive, iCloud**. Strategy: **`campb/FILE_ORG_STRATEGY.md`**;
+catalog schema: `campb/INVENTORY_SCHEMA.md`.
+- **Goal = findability**, not freeing storage. Wendy's pain point is locating files.
+- **Final home = Google Drive** (Wendy owns/runs it after handoff).
+- **Roles:** Darrell runs tooling + guides; Wendy reviews and confirms deletions.
+- **Carbonite is urgent** — backup of a computer she no longer owns; may hold
+  critical files and can be purged after long inactivity. Rescue/restore first.
+- iCloud has no good API → inventoried as a **local folder on Wendy's MacBook**
+  (`~/Library/Mobile Documents/com~apple~CloudDocs`); iCloud confirmed accessible.
+- Inventory tooling: **rclone** on the MacBook (Dropbox + Drive listing/hashing);
+  runbook `campb/RCLONE_RUNBOOK.md`. Catalog = **Airtable** base "Wendy File
+  Inventory" (`app693hLQifCoMCWH`, table `Files` `tblIDqr87hVGHUTU5`), created.
 
 ## Git
 - Development branch for web sessions: `claude/dreamy-bardeen-FNWgQ` (or as assigned).
