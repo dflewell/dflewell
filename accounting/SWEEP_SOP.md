@@ -52,6 +52,11 @@ established (Option A — review-first).
 | Google Workspace / Google LLC | Software & Subscriptions (or Computer & Internet Expenses) |
 | AWS / Amazon Web Services | Computer & Internet Expenses |
 | Cloudflare | Computer & Internet Expenses |
+| Zoom Communications | Software & Subscriptions |
+| Airtable | Software & Subscriptions |
+| Canva (Pro subscription) | Software & Subscriptions |
+| Canva (print items / physical orders) | Flag — confirm business vs. personal before classifying |
+| Akismet / Automattic | Software & Subscriptions *(confirm business use — often forwarded from personal Gmail)* |
 | _Unknown vendor_ | Leave generic; flag for user to classify |
 
 > These are defaults against Xero's standard chart of accounts. Darrell reclassifies
