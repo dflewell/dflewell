@@ -35,8 +35,25 @@ established (Option A — review-first).
    the Gmail→Drive Apps Script). Find the PDF with the Drive `search_files` tool
    (match by invoice number or vendor + date) and read it via `read_file_content`.
    If the PDF isn't found, mark the amount `TBD — check portal/attachment`.
-7. **Output** the report using `reports/REPORT_TEMPLATE.md`. Save a dated copy to
-   `accounting/reports/YYYY-MM-DD-sweep.md`.
+7. **Output (changed 2026-07-14) — write a dated Google Sheet to Drive, not a
+   git-committed markdown file.** The old approach (commit a markdown report to
+   a throwaway session branch) caused 10+ reports to go invisible for weeks
+   because branches were never merged to `main` (see
+   `accounting/reports/2026-07-GAP-REVIEW.md`). Instead:
+   - Build one row per line item with columns: Date, Vendor, Description,
+     Amount, Invoice #, Payment, Suggested Xero Account, Tax, Status/Notes.
+   - Write it as CSV and upload via Drive `create_file` with
+     `contentMimeType: text/csv`, filename `YYYY-MM-DD-sweep.csv`, into the
+     **`Accounting Stuff`** Drive folder. **Do not** set
+     `disableConversionToGoogleType` (leave it unset/false) — this lets Drive
+     auto-convert the CSV into a native Google Sheet, per the CampB gotcha
+     ("CSV uploaded *with* conversion becomes a clean Google Sheet — quote
+     every field, since names/descriptions may contain commas").
+   - Drive MCP is create-only (no update/delete) — same as the reimbursable
+     workflow — so each sweep creates a new dated sheet rather than editing a
+     prior one.
+   - `reports/REPORT_TEMPLATE.md` and any markdown reports already in the repo
+     stay as historical reference; new sweeps no longer add to them.
 8. **Mark processed** — remove the `UNREAD` label from each processed message via
    `unlabel_message` with `labelIds: ["UNREAD"]`. The next sweep then ignores them.
 9. **Reimbursable expenses** — also check for any labels named `Reimbursable - *`
@@ -48,7 +65,7 @@ established (Option A — review-first).
 | Vendor | Suggested Xero account |
 |---|---|
 | Anthropic (Claude) | Software & Subscriptions |
-| Xero | Software & Subscriptions |
+| Xero | Software & Subscriptions — **flat $5.00/month, confirmed by Darrell 2026-07-14. Do not check the portal; use $5.00 directly, no TBD.** |
 | Google Workspace / Google LLC | Software & Subscriptions (or Computer & Internet Expenses) |
 | AWS / Amazon Web Services | Computer & Internet Expenses |
 | Cloudflare | Computer & Internet Expenses |

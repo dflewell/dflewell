@@ -10,30 +10,46 @@
 ## Accounting "Stuff" email sweep
 Routine that sweeps the Gmail **"Accounting stuff"** label for receipts /
 subscription renewals and produces a Xero-ready expense review. Full procedure:
-**`accounting/SWEEP_SOP.md`**. Report template: `accounting/reports/REPORT_TEMPLATE.md`.
-Dated reports land in `accounting/reports/YYYY-MM-DD-sweep.md`.
+**`accounting/SWEEP_SOP.md`**.
+
+**Output (changed 2026-07-14): a dated Google Sheet in the Drive `Accounting
+Stuff` folder (`YYYY-MM-DD-sweep.csv` uploaded so it auto-converts to Sheets),
+NOT a git-committed markdown file.** The old per-branch markdown approach
+caused 10 reports to go stranded/invisible for weeks (see
+`accounting/reports/2026-07-GAP-REVIEW.md` and `2026-07-consolidated.md` for
+the recovery). Old dated `.md` reports in `accounting/reports/` are kept as
+historical reference only — don't add new ones there.
 
 Key facts (so future sessions don't re-discover):
 - Gmail label name: `Accounting stuff`; label ID: `Label_3864205698836096106`.
   **Query by name** (`label:"Accounting stuff"`) — querying by the ID returned nothing.
-- Filter keeps incoming receipts **UNREAD**. Sweep processes `is:unread`, then
-  removes the `UNREAD` label per message (`unlabel_message`) so the next sweep
-  only sees new items.
+- Filter keeps incoming receipts **UNREAD**, but this has proven unreliable —
+  several items landed in the label without ever getting UNREAD and were
+  missed for weeks. Each sweep should still run `is:unread` first, but also
+  periodically diff the full label against previously-processed invoice
+  numbers to catch stragglers (see gap review above for real examples: Zoom,
+  Canva).
 - Mode: **review-first (Option A)** — Darrell reviews before entering in Xero.
 - Vendor→Xero mapping lives in SWEEP_SOP.md (Anthropic/Xero/Google = Software &
-  Subscriptions; AWS = Computer & Internet Expenses).
+  Subscriptions; AWS/Cloudflare = Computer & Internet Expenses; Zoom/Airtable/
+  Canva Pro = Software & Subscriptions). **Xero itself is a flat $5.00/month —
+  confirmed by Darrell 2026-07-14, don't check the portal, just use $5.00.**
 - **Attachment limitation:** the Gmail MCP exposes NO tool to download attachment
   bytes, so amounts living only in PDFs can't be read from email. **Workaround in
   use:** attachments are auto-saved to a Google Drive folder via Gmail filter /
   Apps Script; read them with the Drive `read_file_content` tool during the sweep.
+  Note: some Drive PDFs (e.g. CA Secretary of State filing receipts) arrive
+  with **no corresponding Gmail thread at all** — they were placed in the
+  folder outside this pipeline and the Gmail-driven sweep structurally can't
+  find them; check the Drive folder directly if Darrell mentions a document
+  the sweep hasn't surfaced.
 - Schedule: weekdays ~8:00 PM Pacific, configured in the Claude Code web app
   scheduling UI (not in code). Scheduled session needs the Gmail + Drive MCPs
   connected to work.
-- **Merge reports straight to `main`.** Each scheduled run gets a fresh session
-  branch (per web-session convention) — Darrell looks for reports on `main`, so
-  after committing/pushing the sweep report to the session branch, also
-  fast-forward-merge it into `main` (`git push origin <session-branch>:main`)
-  in the same run. Don't leave it stranded on the throwaway branch waiting on a PR.
+- **Git branch deletion is not available to Claude here:** `git push
+  origin --delete <branch>` gets a 403 from this environment's git proxy, and
+  the connected GitHub MCP has no delete-branch tool. Stale session branches
+  must be deleted manually via the GitHub web UI (repo → Branches page).
 
 ## Reimbursable client expenses
 Out-of-pocket costs (mostly travel) that True North bills back to a client. Full

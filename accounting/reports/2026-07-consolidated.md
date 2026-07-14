@@ -15,8 +15,12 @@ across unmerged branches, see `2026-07-GAP-REVIEW.md`) into one ledger.*
 | Jul 12 | Cloudflare | Invoice IN-71344859 | $10.46 | Computer & Internet Expenses | 2026-07-14-sweep.md |
 | Jul 13 | Canva | Canva Pro subscription | $15.00 | Software & Subscriptions | 2026-07-14-sweep.md |
 | Jun 17 *(gap item, filed under True North)* | CA Secretary of State | LLC Statement of Information filing fee | $20.00 | Filing Fees / Government Fees *(confirm account)* | 2026-07-GAP-REVIEW.md |
+| May 21 | Xero | Subscription invoice INV-7428133 | $5.00 *(flat monthly rate, see note)* | Software & Subscriptions | resolved 2026-07-14 |
+| Jun 20 | Xero | Subscription invoice INV-7528844 | $5.00 *(flat monthly rate, see note)* | Software & Subscriptions | resolved 2026-07-14 |
 
-**Subtotal, ready to enter: $381.86**
+**Subtotal, ready to enter: $391.86**
+
+> **Xero amount resolved 2026-07-14:** Darrell confirmed the Xero subscription is a flat $5.00/month — the sweep no longer needs to check the Xero portal for these. See `SWEEP_SOP.md` vendor mapping.
 
 ---
 
@@ -37,17 +41,13 @@ across unmerged branches, see `2026-07-GAP-REVIEW.md`) into one ledger.*
 
 ---
 
-## Still outstanding (amount unknown, not yet resolvable from email/Drive)
-
-| Invoice | Vendor | Note |
-|---|---|---|
-| INV-7428133 (May) | Xero | Amount only viewable in Xero billing portal (in.xero.com) — never resolved across 4+ sweeps |
-| INV-7528844 (June 20) | Xero | Same — Xero notification emails never include the amount or a PDF |
+## Still outstanding
+None — the two Xero invoices above were the only unresolved items, now settled at the flat $5.00/month rate.
 
 ---
 
-## July total once outstanding items are resolved
-$381.86 confirmed + $14.95 (pending Akismet confirmation) + $52.80 (pending Canva confirmation) + 2 unknown Xero amounts.
+## July total once pending confirmations are resolved
+$391.86 confirmed + $14.95 (pending Akismet confirmation) + $52.80 (pending Canva confirmation) = **$459.61 maximum**, or **$391.86** if both pending items turn out to be personal/out of scope.
 
 ---
 
