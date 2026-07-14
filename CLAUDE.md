@@ -29,6 +29,11 @@ Key facts (so future sessions don't re-discover):
 - Schedule: weekdays ~8:00 PM Pacific, configured in the Claude Code web app
   scheduling UI (not in code). Scheduled session needs the Gmail + Drive MCPs
   connected to work.
+- **Merge reports straight to `main`.** Each scheduled run gets a fresh session
+  branch (per web-session convention) — Darrell looks for reports on `main`, so
+  after committing/pushing the sweep report to the session branch, also
+  fast-forward-merge it into `main` (`git push origin <session-branch>:main`)
+  in the same run. Don't leave it stranded on the throwaway branch waiting on a PR.
 
 ## Reimbursable client expenses
 Out-of-pocket costs (mostly travel) that True North bills back to a client. Full
